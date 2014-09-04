@@ -1,15 +1,15 @@
 # Answer = 6857
-import math
 
-number = 13195
-divisors = []
+number = 600851475143
 
 def find_primes(number):
-		for i in range(2, number):
-				if number % i == 0:
-						find_primes(number / i)
-		divisors.append(number)
-		return divisors[0]
+		i = 2
+		while i * i < number:
+				while number % i == 0:
+						number = number / i
+				i += 1
+		return number
 
-print(find_primes(number))
+
+print find_primes(number)
 
