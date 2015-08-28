@@ -15,23 +15,21 @@ def proper_divisors(n):
 
 
 def run(n):
-    number_divisor_pairs = []
+    number_divisor_pairs = {}
     amicable_numbers = []
     total_sum = 0
 
     iteration_range = xrange(1, n)
     for i in iteration_range:
         sum_divisors = sum(proper_divisors(i))
-        number_divisor_pairs.append((i, sum_divisors))
+        number_divisor_pairs[i] = sum_divisors
 
-    number_divisor_pairs = sorted(number_divisor_pairs, key=lambda tup: tup[1])
-
-    for i in xrange(len(number_divisor_pairs)):
-        for j in xrange(len(number_divisor_pairs)):
-            if i == j: continue
-
-            if number_divisor_pairs[i][0] == number_divisor_pairs[j][1] and number_divisor_pairs[i][1] == number_divisor_pairs[j][0]:
-                amicable_numbers += [number_divisor_pairs[i][0], number_divisor_pairs[j][0]]
+    for key, value in number_divisor_pairs.iteritems():
+        try:
+            if number_divisor_pairs[value] == key and key != value:
+                amicable_numbers += [key, value]
+        except KeyError:
+            pass
 
     return sum(set(amicable_numbers))
 
